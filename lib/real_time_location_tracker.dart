@@ -23,11 +23,11 @@ class _RealTimeLocationTrackerState extends State<RealTimeLocationTracker> {
     _startLocationUpdates();
   }
 
-  // @override
-  // void dispose() {
-  //   _timer?.cancel();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
 
   Future<void> _getCurrentLocation() async {
@@ -70,21 +70,11 @@ class _RealTimeLocationTrackerState extends State<RealTimeLocationTracker> {
     }
   }
 
-
-
-  // void _getCurrentLocation() async {
-  //   Position position = await Geolocator.getCurrentPosition(
-  //     locationSettings: const LocationSettings(
-  //       accuracy: LocationAccuracy.high,
-  //     ),);
-  //   _updateLocation(position);
-  // }
-
   void _startLocationUpdates() {
     _timer = Timer.periodic(const Duration(seconds: 10), (timer) async {
       Position position = await Geolocator.getCurrentPosition(
           locationSettings: const LocationSettings(
-            accuracy: LocationAccuracy.high,
+            accuracy: LocationAccuracy.best,
           ));
       _updateLocation(position);
     });
